@@ -75,8 +75,8 @@ dvwaMessagePush( "'guestbook' table was created." );
 
 // Insert data into 'guestbook'
 $insert = "INSERT INTO guestbook VALUES ('1','This is a test comment.','test');";
-if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
-	dvwaMessagePush( "Data could not be inserted into 'guestbook' table<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
+if( !mysqli_query($GLOBALS["$MESSAGE"],  $insert ) ) {
+	dvwaMessagePush( "Data could not be inserted into 'guestbook' table<br />SQL: " . ((is_object($GLOBALS["$MESSAGE"])) ? mysqli_error($GLOBALS["$MESSAGE"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
 	dvwaPageReload();
 }
 dvwaMessagePush( "Data inserted into 'guestbook' table." );
