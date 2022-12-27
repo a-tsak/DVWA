@@ -236,7 +236,7 @@ class IDS_Converter
         $converted = null;
         
         //deal with double encoded payload 
-        $value = preg_replace('/&amp;/', '&', $value);     
+        $value = str_replace('/&amp;/', '&', $value);     
         
         if (preg_match('/&#x?[\w]+/ms', $value)) {
             $converted = preg_replace('/(&#x?[\w]{2}\d?);?/ms', '$1;', $value);
@@ -306,7 +306,7 @@ class IDS_Converter
             '(?:(?:^|\W)IN[+\s]*\([\s\d"]+[^()]*\))/ims');
         $value   = preg_replace($pattern, '"=0', $value);
         $value   = preg_replace('/null[,\s]/ims', ',0', $value);
-        $value   = preg_replace('/,null/ims', ',0', $value);
+        $value   = str_replace('/,null/ims', ',0', $value);
         $value   = preg_replace('/(?:between|mod)/ims', 'or', $value);
         $value   = preg_replace('/(?:and\s+\d+\.?\d*)/ims', '', $value);
         $value   = preg_replace('/(?:\s+and\s+)/ims', ' or ', $value);
