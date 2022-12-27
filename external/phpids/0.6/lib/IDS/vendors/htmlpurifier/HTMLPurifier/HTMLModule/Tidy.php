@@ -39,7 +39,7 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
     {
         
         // create fixes, initialize fixesForLevel
-        $fixes = $this->makeFixes();
+        $this->makeFixes();
         $this->makeFixesForLevel($fixes);
         
         // figure out which fixes to use
@@ -215,7 +215,7 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
         }
         
         // special case: tag transform
-        if (is_null($property)) 
+        if (is_null($property))
         {
             return array('tag_transform', $params);
         }
