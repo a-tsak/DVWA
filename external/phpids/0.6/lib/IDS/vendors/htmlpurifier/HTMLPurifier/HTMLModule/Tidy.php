@@ -35,7 +35,8 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * @todo Wildcard matching and error reporting when an added or
      *       subtracted fix has no effect.
      */
-    public function setup($config) {
+    public function setup($config)
+    {
         
         // create fixes, initialize fixesForLevel
         $fixes = $this->makeFixes();
@@ -70,7 +71,8 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * @param $level String level identifier, see $levels for valid values
      * @return Lookup up table of fixes
      */
-    public function getFixesForLevel($level) {
+    public function getFixesForLevel($level)
+    {
         if ($level == $this->levels[0]) {
             return array();
         }
@@ -100,9 +102,13 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * the fixes array. It may be custom overloaded, used in conjunction
      * with $defaultLevel, or not used at all.
      */
-    public function makeFixesForLevel($fixes) {
-        if (!isset($this->defaultLevel)) return;
-        if (!isset($this->fixesForLevel[$this->defaultLevel])) {
+    public function makeFixesForLevel($fixes)
+    {
+        if (!isset($this->defaultLevel)){
+            return;
+        }
+        if (!isset($this->fixesForLevel[$this->defaultLevel]))
+        {
             trigger_error(
                 'Default level ' . $this->defaultLevel . ' does not exist',
                 E_USER_ERROR
@@ -117,22 +123,30 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * based on a list of fixes passed to it
      * @param $lookup Lookup table of fixes to activate
      */
-    public function populate($fixes) {
-        foreach ($fixes as $name => $fix) {
+    public function populate($fixes)
+    {
+        foreach ($fixes as $name => $fix)
+        {
             // determine what the fix is for
             list($type, $params) = $this->getFixType($name);
             switch ($type) {
                 case 'attr_transform_pre':
                 case 'attr_transform_post':
                     $attr = $params['attr'];
-                    if (isset($params['element'])) {
+                    if (isset($params['element']))
+                    {
                         $element = $params['element'];
-                        if (empty($this->info[$element])) {
+                        if (empty($this->info[$element]))
+                        {
                             $e = $this->addBlankElement($element);
-                        } else {
+                        }
+                        else
+                        {
                             $e = $this->info[$element];
                         }
-                    } else {
+                    }
+                    else
+                    {
                         $type = "info_$type";
                         $e = $this;
                     }
@@ -169,26 +183,40 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * @note $fix_parameters is type dependant, see populate() for usage
      *       of these parameters
      */
-    public function getFixType($name) {
+    public function getFixType($name)
+    {
         // parse it
         $property = $attr = null;
-        if (strpos($name, '#') !== false) list($name, $property) = explode('#', $name);
-        if (strpos($name, '@') !== false) list($name, $attr)     = explode('@', $name);
+        if (strpos($name, '#') !== false){
+            list($name, $property) = explode('#', $name);
+        }
+        if (strpos($name, '@') !== false){
+            list($name, $attr)     = explode('@', $name);
+        }
         
         // figure out the parameters
         $params = array();
-        if ($name !== '')    $params['element'] = $name;
-        if (!is_null($attr)) $params['attr'] = $attr;
+        if ($name !== ''){
+            $params['element'] = $name;
+        }
+        if (!is_null($attr)){
+            $params['attr'] = $attr;
+        }
         
         // special case: attribute transform
-        if (!is_null($attr)) {
-            if (is_null($property)) $property = 'pre';
+        if (!is_null($attr)) 
+        {
+            if (is_null($property))
+            {
+                $property = 'pre';
+            }
             $type = 'attr_transform_' . $property;
             return array($type, $params);
         }
         
         // special case: tag transform
-        if (is_null($property)) {
+        if (is_null($property)) 
+        {
             return array('tag_transform', $params);
         }
         
@@ -200,7 +228,9 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * Defines all fixes the module will perform in a compact
      * associative array of fix name to fix implementation.
      */
-    public function makeFixes() {}
+    public function makeFixes() 
+    {
+    }
     
 }
 
