@@ -309,7 +309,6 @@ class HTMLPurifier_Lexer_DirectLex extends HTMLPurifier_Lexer
                 $array[] = $token;
                 break;
             }
-            break;
         }
         
         $context->destroy('CurrentLine');
