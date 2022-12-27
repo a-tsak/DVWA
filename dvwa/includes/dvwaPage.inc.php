@@ -493,7 +493,8 @@ function dvwaDatabaseConnect() {
 	//global $DBMS_connError;
 	global $db;
 	global $sqlite_db_connection;
-
+	$DBMS_errorFunc;
+	
 	if( $DBMS == 'MySQL' ) {
 		if( !@($GLOBALS["___mysqli_ston"] = mysqli_connect( $_DVWA[ 'db_server' ],  $_DVWA[ 'db_user' ],  $_DVWA[ 'db_password' ], "", $_DVWA[ 'db_port' ] ))
 		|| !@((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . $_DVWA[ 'db_database' ])) ) {
